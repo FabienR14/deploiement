@@ -1,0 +1,24 @@
+uuid: bda40548-1315-4605-a52b-d97a8e282cb1
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: dev
+folder: dev
+module:
+  admin_toolbar: 0
+  admin_toolbar_tools: 0
+  dblog: 0
+  devel: 0
+  devel_generate: 0
+  field_ui: 0
+  kint: 0
+  shortcut: 0
+  views_ui: 0
+  webprofiler: 0
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0
