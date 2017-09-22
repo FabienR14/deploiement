@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Enhances the token API in core: adds a browseable UI, missing tokens, etc.
+ */
+
+use Drupal\Component\Render\PlainTextOutput;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Menu\MenuLinkInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\TypedData\TranslatableInterface;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\menu_link_content\MenuLinkContentInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_help().
+ */
+function hello_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name == 'help.page.token') {
+    $token_tree = \Drupal::service('token.tree_builder')->buildAllRenderable([
+      'click_insert' => FALSE,
+      'show_restricted' => TRUE,
+      'show_nested' => FALSE,
+    ]);
+    $output = '<h3>' . t('About') . '</h3>';
+    $output .= '<p>' . t('This is a module which says hello to connected user.') . '</p>';
+    $output .= '<h3>' . t('Uses') . '</h3>';
+    $output .= '<p>' . t('When you wish.') . '</p>';
+    return $output;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Displays error !
+ */
+function hello_cron() {
+  drupal_set_message(t("This is a normal message."),"status");
+  drupal_set_message(t("This is a warning."),"warning");
+  drupal_set_message(t("This is an error."),"error");
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * Says hello user !
+ */
+function hello_user_login($account) {
+  drupal_set_message(t('Welcome dear %name !',
+      array('%name' => $account->getAccountName())),"status");
+}
+
+function hello_node_update(NodeInterface $node) {
+  $database = \Drupal::database();
+  $user = \Drupal::currentUser();
+  $database->insert('hello_node_history')->fields(array(
+    'nid' => $node->id(),
+    'uid' => $user->id(),
+    'update_time' => REQUEST_TIME,
+  ))->execute();
+
+}
+
+function hello_preprocess_block(array &$variables) {
+  $class = \Drupal::config('hello.config')->get('color');
+  $variables['attributes']['class'][] = $class;
+}
+
+function hello_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'hello/hello';
+}
+
+function hello_theme($existing, $type, $theme, $path) {
+  return array(
+    'hello_node_history' => array(
+      'template' => 'hello-node-history',
+      'variables' => array('data' => null)
+    )
+  );
+}

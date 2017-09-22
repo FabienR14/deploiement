@@ -1,0 +1,19 @@
+name: 'RELAXed Web Services'
+type: module
+description: 'Provides a RESTful API that exposes all content entities over UUID endpoints. Utility endpoints are also provided subscribing to changes and handling content replication.'
+package: Web services
+# core: 8.x
+dependencies:
+  - rest
+  - basic_auth
+  - multiversion
+  - replication
+  - system (>=8.3.x)
+test_dependencies:
+  - workspace
+
+# Information added by Drupal.org packaging script on 2017-09-06
+version: '8.x-1.0-beta2'
+core: '8.x'
+project: 'relaxed'
+datestamp: 1504688057

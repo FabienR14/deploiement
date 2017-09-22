@@ -1,0 +1,67 @@
+hello.hello:
+  path: '/hello'
+  defaults:
+    _title: 'Hello'
+    _controller: '\Drupal\hello\Controller\HelloController::content'
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.parameter:
+  path: '/hello/{param}'
+  defaults:
+    _title: 'Hello parameter'
+    _controller: '\Drupal\hello\Controller\HelloController::contentWithParam'
+    param: 'no parameter'
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.rss:
+  path: '/hello/rss'
+  defaults:
+    _title: 'Hello RSS'
+    _controller: '\Drupal\hello\Controller\HelloController::contentRSS'
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.display:
+  path: '/hello/display/{start}'
+  defaults:
+    _title: 'Hello display'
+    _controller: '\Drupal\hello\Controller\HelloController::contentDisplay'
+    start: null
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.node.history:
+  path: '/hello/node/{node}'
+  defaults:
+    _title: 'Node history'
+    _controller: '\Drupal\hello\Controller\HelloNodeHistoryController::content'
+    param: 1
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.node.history.twig:
+  path: '/hello/node/{node}/special'
+  defaults:
+    _title: 'Node history special'
+    _controller: '\Drupal\hello\Controller\HelloNodeHistoryController::contentTwig'
+    param: 1
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.calculator:
+  path: '/hello/calculator'
+  defaults:
+    _title: 'Calculator'
+    _form: '\Drupal\hello\Form\HelloForm'
+  requirements:
+    _access: 'TRUE'
+
+hello.hello.admin.block.color:
+  path: '/admin/block/color'
+  defaults:
+    _title: 'Block Color'
+    _form: '\Drupal\hello\Form\HelloAdminForm'
+  requirements:
+    _access: 'TRUE'

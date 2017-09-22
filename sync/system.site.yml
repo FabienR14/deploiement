@@ -1,0 +1,14 @@
+uuid: c2ae40fe-395f-4538-a2c6-9cfed4cc5c47
+name: 'Site Drupal Formation modifié'
+mail: walther.anthony@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: AyT9s8OUcclfALRE_imByOMgtZ19eOlqdF6zI3p7yqo

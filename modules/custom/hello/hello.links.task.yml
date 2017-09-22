@@ -1,0 +1,10 @@
+hello.node.node.history:
+  route_name: hello.hello.node.history
+  base_route: entity.node.canonical
+  title: Node history
+  weight: 5
+hello.node.node.history.twig:
+  route_name: hello.hello.node.history.twig
+  base_route: entity.node.canonical
+  title: Node history special
+  weight: 6
